@@ -74,13 +74,13 @@ class SaleOrderLine(models.Model):
                 )
                 # Inverse qty_delivered because outgoing quantities are negative
                 line.margin_delivered = -qty_delivered * (
-                    line.price_reduce - line.purchase_price_delivery
+                    line.price_reduce_taxexcl - line.purchase_price_delivery
                 )
             # compute percent margin based on delivered quantities or ordered
             # quantities
-            if line.price_reduce:
+            if line.price_reduce_taxexcl:
                 line.margin_delivered_percent = (
-                    (line.price_reduce - line.purchase_price_delivery)
-                    / line.price_reduce
+                    (line.price_reduce_taxexcl - line.purchase_price_delivery)
+                    / line.price_reduce_taxexcl
                     * 100.0
                 )
